@@ -1,4 +1,4 @@
-# Project Title
+# csv2ics
 
 take semi unstructured data from a csv file and create an ics calendar
 
