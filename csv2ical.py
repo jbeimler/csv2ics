@@ -25,9 +25,13 @@ if __name__ == "__main__":
             if line_count >= 0:
                 start, end = (
                     dateparser.parse(row["start"]).date(),
-                    dateparser.parse(row["end"]).date(),
+                    dateparser.parse(row["end"]),
                 )
-                print(f"{row['description']}:  {start} ➡️ {end}")
+                if not end:  # bad/no end date, make it tomorrow
+                    end = start + timedelta(days=1)
+                else:
+                    end = end.date()
+                print(f"📅 {start} ➡️ {end}: {row['description']}")
                 if row["description"].lower() == "Y":
                     transparency = "TRANSPARENT"  # outlook calls this Free
                 else:
@@ -42,10 +46,6 @@ if __name__ == "__main__":
                 )
             line_count += 1
     print(f"Processed {line_count} lines.")
-
-    # filename = Path(f"{base_name}.ics")
-    # with filename.open("w") as ics_file:
-    #    ics_file.write(IcsCalendarStream.calendar_to_ics(cal))
 
     # FIXME Hack to add X-MICROSOFT-CDO-ALLDAYEVENT:TRUE
     #   so outlook makes it all day instead of 12am-12am
