@@ -27,7 +27,7 @@ MVP, created for full day and multi day events.
   * start -- start date, most formats supportedd
   * end -- end date, most formats supportedd
   * transparency -- contains free/busy, Y is free, anything else is busy
-* run ```python csv2ics.py <events.csv>``
+* run `python csv2ics.py <events.csv>`
 * it will create ```events.ics```
 * import calendar into your favorite calendar application
 
